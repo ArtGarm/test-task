@@ -27,6 +27,7 @@ function Row({ row, handleRemove }: Props) {
       <TableCell>{row.numberOfPlayers}</TableCell>
       <TableCell>{row.entryFee}</TableCell>
       <TableCell>{row.totalPrize}</TableCell>
+      <TableCell>{row.winners}</TableCell>
       <TableCell>
         <Button component={NavLink} to={`/${row.id}`}>link</Button>
         <Button onClick={handleRemove}>Remove a Prize</Button>

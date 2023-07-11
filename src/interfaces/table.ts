@@ -5,6 +5,7 @@ export enum OrderByEnum {
   players = 'players',
   entryFee = 'entryFee',
   totalPrize = 'totalPrize',
+  winners = 'winners'
 }
 
 export type Order = 'asc' | 'desc';

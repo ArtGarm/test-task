@@ -12,7 +12,8 @@ function sortFunction(
     || (sortOrderBy === OrderByEnum.id && 'id')
     || (sortOrderBy === OrderByEnum.players && 'numberOfPlayers')
     || (sortOrderBy === OrderByEnum.entryFee && 'entryFee')
-    || (sortOrderBy === OrderByEnum.totalPrize && 'totalPrize');
+    || (sortOrderBy === OrderByEnum.totalPrize && 'totalPrize')
+    || (sortOrderBy === OrderByEnum.winners && 'winners');
 
   // @ts-ignore
   let normalizeA = a?.[`${accesor}`];

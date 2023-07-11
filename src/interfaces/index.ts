@@ -1,6 +1,8 @@
 export interface PrizeDistribution {
   place: number;
   prize: number;
+  winners: number;
+  percentage: boolean;
 }
 
 export interface Tournament {
@@ -17,4 +19,5 @@ export interface TournamentInTable extends Tournament {
 
 export interface TournamentInTableWithSumm extends TournamentInTable {
   totalPrize: number;
+  winners: number;
 }

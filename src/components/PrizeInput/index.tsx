@@ -2,19 +2,23 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import { Control, useController } from 'react-hook-form';
 import Box from '@mui/material/Box';
+import {InputAdornment} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import PercentIcon from '@mui/icons-material/Percent';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 interface Props {
   control: Control<any>
   label: string
   name: string
+  percentFieldName: string
   rows?: number
   type?: string
 }
 
-function Input({
-  name, control, label, type, rows,
-}: Props) {
+function PrizeInput({ name, percentFieldName, control, label, type, rows }: Props) {
   const { field, fieldState } = useController({ name, control });
+  const percentField = useController({ name: percentFieldName, control });
 
   const handleChange = (e) => {
     if(type === 'number') {
@@ -42,14 +46,26 @@ function Input({
         multiline={!!rows}
         rows={rows}
         size="small"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={() => percentField.field.onChange({ target: { value: !percentField.field.value }})}
+              onMouseDown={() => percentField.field.onChange({ target: { value: !percentField.field.value }})}
+              edge="end"
+            >
+              {percentField.field.value ? <PercentIcon /> : <AttachMoneyIcon />}
+            </IconButton>
+          </InputAdornment>
+        }}
       />
     </Box>
   );
 }
 
-Input.defaultProps = {
+PrizeInput.defaultProps = {
   rows: undefined,
   type: 'text',
 };
 
-export default Input;
+export default PrizeInput;

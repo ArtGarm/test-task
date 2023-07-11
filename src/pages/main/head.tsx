@@ -37,6 +37,10 @@ const tableHead = [
     orderKey: OrderByEnum.totalPrize,
   },
   {
+    title: 'Number of Winners',
+    orderKey: OrderByEnum.winners,
+  },
+  {
     title: 'Actions',
   },
 ];

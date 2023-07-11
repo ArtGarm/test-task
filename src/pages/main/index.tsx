@@ -4,14 +4,16 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 
-import data from './moc';
 import Head from './head';
 import { Order, OrderByEnum } from '../../interfaces/table';
 import { TournamentInTable } from '../../interfaces';
 import Row from './row';
 import sortFunction from './sortHelper';
+import storage from '../../helpers'
 
 function TablePage() {
+  const data = storage.getFromLocalStorage()
+
   const [loadedData, setLoadedData] = useState<TournamentInTable[]>(data);
 
   const [sortOrder, setSortOrder] = useState<Order>('desc');
@@ -31,6 +33,9 @@ function TablePage() {
         item.id === id ? { ...item, prizeDistribution: item.prizeDistribution.slice(0, -1) } : item
       ),
     ));
+
+    const updated = data.find(it => it.id === id);
+    storage.updateSingleFromLocalStorage({...updated, prizeDistribution: updated.prizeDistribution.slice(0, -1) })
   };
 
   return (
@@ -43,6 +48,7 @@ function TablePage() {
               .map((d) => ({
                 ...d,
                 totalPrize: d.prizeDistribution.reduce((a, p) => a + p.prize, 0),
+                winners: d.prizeDistribution.reduce((a, p) => a + p.winners, 0),
               }))
               .sort((a, b) => sortFunction(sortOrderBy, sortOrder, a, b))
               .map((row) => (
